@@ -1,0 +1,153 @@
+Anurag Gupta 
+CS IOT A
+2101641550023
+
+
+
+
+
+
+1) Next greater element to right:-
+ 
+class Solution
+{
+    public:
+    //Function to find the next greater element for each element of the array.
+    vector<long long> nextLargerElement(vector<long long> arr, int n){
+        stack<long long> st;
+        st.push(-1);
+        vector<long long> ans;
+       
+        for(int i = n-1; i>= 0 ; i--){
+            if(st.top() == -1 or st.top() > arr[i]){
+                ans.push_back(st.top());
+                st.push(arr[i]);
+            }
+            else{
+                while(st.top() != -1 and st.top() <= arr[i]){
+                    st.pop();
+                }
+                ans.push_back(st.top());
+                st.push(arr[i]);
+            }
+        }
+        reverse(ans.begin(), ans.end());
+        return ans;
+    }
+};
+__________________________________________________________________________________________________________________________________________
+
+2) Next greater element to left:-
+
+vector<int> nextGreaterElement(int N, vector<int>& arr) {
+
+        // code here
+
+        stack<int>st;
+
+        for(int i=N-2;i>=0;i--)
+
+        {
+            st.push(arr[i]);
+        }
+
+        vector<int>ans;
+
+        for(int i=N-1;i>=0;i--)
+
+        {
+            while(!st.empty() && st.top()<=arr[i])
+            {
+                st.pop();
+            }
+
+            if(st.empty())
+            {
+                ans.push_back(-1);
+                st.push(arr[i]);
+            }
+            else{
+            ans.push_back(st.top());
+            st.push(arr[i]);
+            }
+
+        }
+        reverse(ans.begin(),ans.end());
+        return ans;
+
+    }
+
+_______________________________________________________________________________________________________________________________________
+
+
+3) Valid Parenthesis:-
+
+class Solution {
+public:
+    bool isValid(string s) {
+        stack<char>st;
+        for(auto i:s){
+            if(i=='(' or i=='{' or i=='['){
+                st.push(i);
+            }
+            else{
+                if(st.empty() or (st.top()=='(' and i!=')') or (st.top()=='{' and i!='}') or (st.top()=='[' and i!=']')){
+                    return false;
+                   
+                }
+                st.pop();
+            }
+        }
+        return st.empty();
+        
+    }
+};
+
+_________________________________________________________________________________________________________________________________________ 
+
+4) Next smallest element to right:-
+
+vector<int> nextSmallerElementToRight(int arr[], int n) {
+	stack<int> s;
+	vector<int> v;
+
+	for(int i = n - 1; i >= 0; i--) {
+	    while(!s.empty() && s.top() >= arr[i]) {
+			s.pop();
+		}
+		if(s.empty()) {
+		    v.push_back(-1);
+		}
+		else  {
+		    v.push_back(s.top());
+		}
+		s.push(arr[i]);
+	}
+	reverse(v.begin(), v.end());
+	return v;
+}
+
+_____________________________________________________________________________________________________________________________________
+
+5) Next smallest element to left:-
+
+void printPrevSmaller(int arr[], int n)
+{
+    
+    stack<int> Stack;
+    for (int i=0; i<n; i++)
+    {
+        while (!Stack.empty() && Stack.top() >= arr[i])
+            Stack.pop();
+        if (Stack.empty())
+            cout << "-1,";
+        else {
+ 
+
+            cout << Stack.top() << ", ";}
+        Stack.push(arr[i]);
+    }
+}
+ 
+
+
